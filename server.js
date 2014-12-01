@@ -93,7 +93,10 @@ app.get('/random', function (req, res) {
 
     if (files.length) {
       var gif = files[Math.floor(Math.random() * files.length)];
-      res.redirect('/' + gif.replace('.gif', ''));
+      res.render('single', {
+        gif: gif,
+        title: gif.replace('.gif', '').replace('-', ' ')
+      });
     } else {
       res.status(404).send('There are no gifs, you crip.');
     }
