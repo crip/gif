@@ -30,6 +30,7 @@ app.use(methodOverride());
 
 // Define folder to contain gifs
 app.use('/', express.static(path.join(__dirname, 'gifs')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 /*-------------------------------------------------------------------
@@ -48,7 +49,10 @@ app.get('/', function (req, res) {
     if (files.length) {
       var file = Math.floor(Math.random() * files.length);
       res.render('gif', {
-        gif: files[file]
+        gif: files[file],
+        title: files.map(function (file) {
+          return file.replace('.gif', '')
+        })
       });
     } else {
       res.send(404, 'There are no gifs, you crip.')
