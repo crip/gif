@@ -23,7 +23,7 @@ var app = express();
   Environments
 -------------------------------------------------------------------*/
 app.set('port', 3333);
-app.set('views', __dirname + '/tpl');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(methodOverride());
@@ -50,9 +50,7 @@ app.get('/', function (req, res) {
       var file = Math.floor(Math.random() * files.length);
       res.render('gif', {
         gif: files[file],
-        title: files.map(function (file) {
-          return file.replace('.gif', '')
-        })
+        title: files[file].replace('.gif', '').replace('-', ' ')
       });
     } else {
       res.send(404, 'There are no gifs, you crip.')
@@ -92,7 +90,8 @@ app.get('/:gif', function (req, res) {
   fs.exists(path.join(__dirname, 'gifs', gif), function (exists) {
     if (exists) {
       res.render('single', {
-        gif: gif
+        gif: gif,
+        title: gif.replace('.gif', '').replace('-', ' ')
       });
     } else {
       res.send(404, 'There are no gif, you crip');

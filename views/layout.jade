@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    script(type='text/javascript', src='http://www.google.com/jsapi')
+    script(type='text/javascript').
+      google.load("jquery", "1");
+    script(src='//use.typekit.net/oni3vzi.js')
+    script.
+      try{Typekit.load();}catch(e){}
+
+    link(rel="stylesheet", href="/public/dist/master.min.css")
+
+    block title
+      title Crip Gifs - #{title}
+    
+    meta(charset="UTF-8")
+  body(class="#{title}")
+    header(class="header" role="banner")
+      h1.logo
+        a(href="/") Crip.io
+      a(href="/list" class="show-all") Show all
+    block content
