@@ -85,7 +85,8 @@ app.get('/list', function (req, res) {
  * Redirect to random gif
  */
 app.get('/random', function (req, res) {
-  fs.readdir(path.join(__dirname, 'gifs'), function (err, files) {
+  var dir = path.join(__dirname, 'gifs');
+  fs.readdir(dir, function (err, files) {
     if (err) {
       res.status(500).send('There was an error on the server');
       return;
@@ -93,10 +94,16 @@ app.get('/random', function (req, res) {
 
     if (files.length) {
       var gif = files[Math.floor(Math.random() * files.length)];
-      res.render('single', {
-        gif: gif,
-        title: gif.replace('.gif', '').replace('-', ' ')
-      });
+      fs.readFile(dir + '/' + gif, function (err, data) {
+        if (err) {
+          res.status(500).send('There was an error on the server');
+        } else {
+          res.writeHead(200, {
+            'Content-Type': 'image/gif'
+          });
+          res.end(data, 'binary');
+        }
+      })
     } else {
       res.status(404).send('There are no gifs, you crip.');
     }
