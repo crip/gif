@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
       var file = Math.floor(Math.random() * files.length);
       res.render('gif', {
         gif: files[file],
-        title: files[file].replace('.gif', '').replace('-', ' ')
+        title: files[file].replace('.gif', '').replace(/-/g, ' ')
       });
     } else {
       res.status(404).send('There are no gifs, you crip.')
@@ -110,7 +110,7 @@ app.get('/:gif', function (req, res) {
     if (exists) {
       res.render('single', {
         gif: gif,
-        title: gif.replace('.gif', '').replace('-', ' ')
+        title: gif.replace('.gif', '').replace(/-/g, ' ')
       });
     } else {
       res.status(404).send('There are no gif, you crip');
