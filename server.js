@@ -82,6 +82,25 @@ app.get('/list', function (req, res) {
 });
 
 /**
+ * Redirect to random gif
+ */
+app.get('/random', function (req, res) {
+  fs.readdir(path.join(__dirname, 'gifs'), function (err, files) {
+    if (err) {
+      res.send(500, 'There was an error on the server');
+      return;
+    }
+
+    if (files.length) {
+      var gif = files[Math.floor(Math.random() * files.length)];
+      res.redirect('/' + gif.replace('.gif', ''));
+    } else {
+      res.send(404, 'There are no gifs, you crip.')
+    }
+  });
+});
+
+/**
  * Display single gif
  */
 app.get('/:gif', function (req, res) {
@@ -98,8 +117,6 @@ app.get('/:gif', function (req, res) {
     }
   });
 });
-
-
 /*-------------------------------------------------------------------
   Run this beauty
 -------------------------------------------------------------------*/
