@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title Crip Gifs - #{gif}
+    style.
+      body {
+        position: absolute;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background: black no-repeat fixed center;
+        background-size: contain;
+        cursor: pointer;
+        background-image: url('/#{gif}');
+      }
+  body
+    script.
+      function reload () {
+        window.location = window.location
+      }
+
+      var body = document.querySelector('body');
+
+      if (window.addEventListener) {
+        body.addEventListener('click', reload);
+        body.addEventListener('touchend', reload);
+      } else if (window.attachEvent) {
+        body.attachEvent('onclick', reload);
+      } else {
+        body.onclick = reload;
+      }

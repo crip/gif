@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title All Crip Gifs
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui")
+    style.
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+  body
+    h1 All Crip Gifs
+    ul
+      each gif in gifs
+        li: a(href="/#{gif}")= gif

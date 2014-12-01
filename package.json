@@ -1,0 +1,32 @@
+{
+  "name": "gifcrip",
+  "version": "1.0.0",
+  "description": "Gif vault for Crip.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:crip/gif.git"
+  },
+  "keywords": [
+    "gif",
+    "gifs",
+    "crip"
+  ],
+  "author": "Johnie Hjelm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crip/gif/issues"
+  },
+  "homepage": "https://github.com/crip/gif",
+  "devDependencies": {
+    "body-parser": "^1.9.3",
+    "express": "^4.10.4",
+    "jade": "^1.8.1",
+    "method-override": "^2.3.0",
+    "request": "^2.49.0"
+  }
+}
