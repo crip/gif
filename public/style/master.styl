@@ -38,6 +38,7 @@ body
   font-size 10px
   width 4.5em
   height 5em
+  margin 0
   top 50%
   left 10px
   transform translateY(-50%)
@@ -78,9 +79,10 @@ body
  * The gif
  */
 .the-gif
+  @extend .cf
   position absolute
   display block
-  max-width 800px
+  width 500px
   top 50%
   left 50%
   transform translate(-50%, -50%)
@@ -89,3 +91,19 @@ body
     display block
     width 100%
     height auto
+
+  @media (max-width: 500px)
+    width 100%
+
+
+.shuffle
+  position absolute
+  bottom -6em
+  left 50%
+  transform translateX(-50%)
+  text-indent -9999px
+  background transparent url('/public/images/reload.svg') center center no-repeat
+  background-size 100% 100%
+  font-size 10px
+  width 3em
+  height 3em
