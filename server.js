@@ -42,7 +42,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.get('/', function (req, res) {
   fs.readdir(path.join(__dirname, 'gifs'), function methodName(err, files) {
     if (err) {
-      res.send(500, 'There was an error on the server');
+      res.status(500).send('There was an error on the server');
       return;
     }
 
@@ -53,7 +53,7 @@ app.get('/', function (req, res) {
         title: files[file].replace('.gif', '').replace('-', ' ')
       });
     } else {
-      res.send(404, 'There are no gifs, you crip.')
+      res.status(404).send('There are no gifs, you crip.')
     }
   });
 });
@@ -65,7 +65,7 @@ app.get('/', function (req, res) {
 app.get('/list', function (req, res) {
   fs.readdir(path.join(__dirname, 'gifs'), function (err, files) {
     if (err) {
-      res.send(500, 'There was an error on the server');
+      res.status(500).send('There was an error on the server');
       return;
     }
 
@@ -76,7 +76,7 @@ app.get('/list', function (req, res) {
         })
       });
     } else {
-      res.send(404, 'There are no gifs, you crip.')
+      res.status(404).send('There are no gifs, you crip.')
     }
   });
 });
@@ -87,7 +87,7 @@ app.get('/list', function (req, res) {
 app.get('/random', function (req, res) {
   fs.readdir(path.join(__dirname, 'gifs'), function (err, files) {
     if (err) {
-      res.send(500, 'There was an error on the server');
+      res.status(500).send('There was an error on the server');
       return;
     }
 
@@ -95,7 +95,7 @@ app.get('/random', function (req, res) {
       var gif = files[Math.floor(Math.random() * files.length)];
       res.redirect('/' + gif.replace('.gif', ''));
     } else {
-      res.send(404, 'There are no gifs, you crip.')
+      res.status(404).send('There are no gifs, you crip.');
     }
   });
 });
@@ -113,7 +113,7 @@ app.get('/:gif', function (req, res) {
         title: gif.replace('.gif', '').replace('-', ' ')
       });
     } else {
-      res.send(404, 'There are no gif, you crip');
+      res.status(404).send('There are no gif, you crip');
     }
   });
 });
