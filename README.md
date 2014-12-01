@@ -2,6 +2,10 @@
 
 > A curated list of crip gifs
 
+### Contributors
+  
+* [Fredrik Forsmo](http://github.com/frozzare)
+
 ### Licence
 
 [MIT](https://tldrlegal.com/license/mit-license) © [Crip.io](http://crip.io)

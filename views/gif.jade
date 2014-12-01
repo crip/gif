@@ -1,6 +1,10 @@
 extends ./layout.jade
 
 block content
+
+  div.the-gif
+    img(src="#{gif}", alt="#{gif}")
+
   script.
     function reload () {
       window.location = window.location
