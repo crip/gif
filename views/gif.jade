@@ -4,19 +4,4 @@ block content
 
   div.the-gif
     img(src="#{gif}", alt="#{gif}")
-
-  script.
-    function reload () {
-      window.location = window.location
-    }
-
-    var body = document.querySelector('body');
-
-    if (window.addEventListener) {
-      body.addEventListener('click', reload);
-      body.addEventListener('touchend', reload);
-    } else if (window.attachEvent) {
-      body.attachEvent('onclick', reload);
-    } else {
-      body.onclick = reload;
-    }
+    a(href="#" class="shuffle") Shuffle gif
