@@ -68,11 +68,30 @@ app.get('/list', function (req, res) {
     }
 
     if (files.length) {
-      res.render('list', { 
-        gifs: files 
+      res.render('list', {
+        gifs: files.map(function (file) {
+          return file.replace('.gif', '')
+        })
       });
     } else {
       res.send(404, 'There are no gifs, you crip.')
+    }
+  });
+});
+
+/**
+ * Display single gif
+ */
+app.get('/:gif', function (req, res) {
+  var gif = req.params.gif + '.gif';
+
+  fs.exists(path.join(__dirname, 'gifs', gif), function (exists) {
+    if (exists) {
+      res.render('single', {
+        gif: gif
+      });
+    } else {
+      res.send(404, 'There are no gif, you crip');
     }
   });
 });
