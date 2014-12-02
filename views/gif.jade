@@ -5,6 +5,8 @@ block content
   main(role="main" class="the-gif" id="main")
     img(src="#{gif}", alt="#{gif}")
     nav.gif-nav
-      a(href="#" class="nav-btn nav-btn--shuffle") Shuffle gif
+      a(href="#" class="nav-btn nav-btn--shuffle" id="shuffle") Shuffle gif
       a(href="#{single}" class="nav-btn nav-btn--expand") Shuffle gif
       a(href="#{full}" class="nav-btn nav-btn--full") Shuffle gif
+
+      h3.gif-title= title

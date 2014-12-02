@@ -8,7 +8,7 @@
     },
     starter: function() {
       var img = $("#main img"),
-          shuffleBtn = $(".shuffle");
+          shuffleBtn = $("#shuffle");
 
       shuffleBtn.on("click", function (e) {
         e.preventDefault();
