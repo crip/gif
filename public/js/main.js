@@ -7,11 +7,18 @@
       this.starter();
     },
     starter: function() {
-      var shuffleBtn = $(".shuffle");
+      var img = $("#main img"),
+          shuffleBtn = $(".shuffle");
 
       shuffleBtn.on("click", function (e) {
         e.preventDefault();
-        window.location = window.location;
+        $.ajax({
+          url: '/random',
+          type: 'get',
+          success: function () {
+            img.attr('src', this.url);
+          }
+        });
       });
     }
   };
