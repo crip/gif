@@ -16,7 +16,8 @@ var
   path           = require('path'),
   fs             = require('fs'),
   rmExt          = require('remove-ext'),
-  config         = require("./config.js");
+  config         = require("./config.js"),
+  wrapper        = require("./lib/wrapper.js");
 
 
 var app = express();
@@ -34,6 +35,14 @@ app.use(methodOverride());
 // Define folder to contain gifs
 app.use('/', express.static(path.join(__dirname, 'gifs')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
+
+// Catch-all route to set global values
+app.use(function( req, res, next ) {
+  res.locals.wrap = wrapper.create({
+    start: new Date()
+  });
+  next();
+});
 
 
 /*-------------------------------------------------------------------
@@ -61,6 +70,25 @@ app.get('/', function (req, res) {
   });
 });
 
+/**
+ * API
+ */
+app.get('/api', function (req, res) {
+  fs.readdir(path.join(__dirname, 'gifs'), function (err, files) {
+    if ( err ) {
+      res.status(500).json({ error: err });
+      return;
+    }
+
+    res.status(200).json(res.locals.wrap(files.map(function( gif ) {
+      return config.url + rmExt(gif, 'gif');
+    }), {
+      next: config.url + 'api?page=2',
+      random: config.url + 'random',
+      home: config.url
+    }));
+  });
+});
 
 /**
  * List all Gifs
