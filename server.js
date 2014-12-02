@@ -6,7 +6,7 @@
 
 
 /*-------------------------------------------------------------------
-  Required plugins
+  Required modules.
 -------------------------------------------------------------------*/
 var
   express        = require('express'),
@@ -14,7 +14,8 @@ var
   methodOverride = require('method-override'),
   request        = require('request'),
   path           = require('path'),
-  fs             = require('fs');
+  fs             = require('fs'),
+  rmExt          = require('remove-ext');
 
 var app = express();
 
@@ -50,7 +51,7 @@ app.get('/', function (req, res) {
       var file = Math.floor(Math.random() * files.length);
       res.render('gif', {
         gif: files[file],
-        title: files[file].replace('.gif', '').replace('-', ' ')
+        title: rmExt(files[file], 'gif').replace('-', ' ')
       });
     } else {
       res.status(404).send('There are no gifs, you crip.')
@@ -72,7 +73,7 @@ app.get('/list', function (req, res) {
     if (files.length) {
       res.render('list', {
         gifs: files.map(function (file) {
-          return file.replace('.gif', '')
+          return rmExt(file, 'gif')
         })
       });
     } else {
@@ -120,7 +121,7 @@ app.get('/:gif', function (req, res) {
     if (exists) {
       res.render('single', {
         gif: gif,
-        title: gif.replace('.gif', '').replace('-', ' ')
+        title: rmExt(gif, 'gif').replace('-', ' ')
       });
     } else {
       res.status(404).send('There are no gif, you crip');
