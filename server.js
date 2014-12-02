@@ -62,6 +62,8 @@ app.get('/', function (req, res) {
       var file = Math.floor(Math.random() * files.length);
       res.render('gif', {
         gif: files[file],
+        single: rmExt(files[file], 'gif'),
+        full: rmExt(files[file], 'gif') + '/full',
         title: rmExt(files[file], 'gif').replace(/-/g, ' ')
       });
     } else {

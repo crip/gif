@@ -4,4 +4,7 @@ block content
 
   main(role="main" class="the-gif" id="main")
     img(src="#{gif}", alt="#{gif}")
-    a(href="#" class="shuffle") Shuffle gif
+    nav.gif-nav
+      a(href="#" class="nav-btn nav-btn--shuffle") Shuffle gif
+      a(href="#{single}" class="nav-btn nav-btn--expand") Shuffle gif
+      a(href="#{full}" class="nav-btn nav-btn--full") Shuffle gif

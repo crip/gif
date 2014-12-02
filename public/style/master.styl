@@ -83,7 +83,7 @@ body
   position absolute
   display block
   width 600px
-  padding 0em 1em
+  margin 0em 1em
   top 50%
   left 50%
   transform translate(-50%, -50%)
@@ -96,15 +96,42 @@ body
   @media (max-width: 600px)
     width 100%
 
-
-.shuffle
+.gif-nav
+  @extend .cf
+  background-color darken($brand-color, 10%)
   position absolute
-  bottom -6em
-  left 50%
-  transform translateX(-50%)
+  top 100%
+  left 0
+  width 100%
+  height 40px
+  padding 0em 1em
+
+.nav-btn
+  margin-right 1.5em
+  float left
+  display block
+  position relative
+  top 50%
+  transform translateY(-50%)
   text-indent -9999px
+
+.nav-btn--shuffle
   background transparent url('/public/images/reload.svg') center center no-repeat
   background-size 100% 100%
   font-size 10px
-  width 3em
-  height 3em
+  width 2.5em
+  height 2.5em
+
+.nav-btn--expand
+  background transparent url('/public/images/expand.svg') center center no-repeat
+  background-size 100% 100%
+  font-size 10px
+  width 2.5em
+  height 2.5em
+
+.nav-btn--full
+  background transparent url('/public/images/link.svg') center center no-repeat
+  background-size 100% 100%
+  font-size 10px
+  width 2.5em
+  height 2.5em
