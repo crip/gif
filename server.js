@@ -15,7 +15,9 @@ var
   request        = require('request'),
   path           = require('path'),
   fs             = require('fs'),
-  rmExt          = require('remove-ext');
+  rmExt          = require('remove-ext'),
+  config         = require("./config.js");
+
 
 var app = express();
 
@@ -102,7 +104,7 @@ app.get('/random', function (req, res) {
           res.writeHead(200, {
             'Content-Type': 'image/gif',
             'Access-Control-Allow-Origin':'*',
-            'X-Gif-Link': 'localhost:3333/' + gif
+            'X-Gif-Link': config.url + gif
           });
           res.end(data, 'binary');
         }
@@ -130,6 +132,40 @@ app.get('/:gif', function (req, res) {
     }
   });
 });
+
+/**
+ * Display full gif
+ */
+app.get('/:gif/full', function (req, res) {
+  var gif = req.params.gif + '.gif',
+      dir = path.join(__dirname, 'gifs');;
+
+  fs.readdir(dir, function (err, files) {
+    if (err) {
+      res.status(500).send('There was an error on the server');
+      return;
+    }
+
+    if (files.length) {
+      fs.readFile(dir + '/' + gif, function (err, data) {
+        if (err) {
+          res.status(500).send('There was an error on the server');
+        } else {
+          res.writeHead(200, {
+            'Content-Type': 'image/gif',
+            'Access-Control-Allow-Origin':'*',
+            'X-Gif-Link': config.url + gif
+          });
+          res.end(data, 'binary');
+        }
+      })
+    } else {
+      res.status(404).send('There are no gifs, you crip.');
+    }
+  });
+});
+
+
 /*-------------------------------------------------------------------
   Run this beauty
 -------------------------------------------------------------------*/
