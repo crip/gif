@@ -99,7 +99,9 @@ app.get('/random', function (req, res) {
           res.status(500).send('There was an error on the server');
         } else {
           res.writeHead(200, {
-            'Content-Type': 'image/gif'
+            'Content-Type': 'image/gif',
+            'Access-Control-Allow-Origin':'*',
+            'X-Gif-Link': 'localhost:3333/' + gif
           });
           res.end(data, 'binary');
         }
