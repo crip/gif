@@ -86,7 +86,7 @@ app.get('/api', function (req, res) {
       return config.url + rmExt(gif, 'gif');
     }), {
       next: config.url + 'api?page=2',
-      random: config.url + 'random',
+      random: config.url + 'api/random',
       home: config.url
     }));
   });

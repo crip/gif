@@ -8,15 +8,18 @@
     },
     starter: function() {
       var img = $("#main img"),
-          shuffleBtn = $("#shuffle");
+          shuffleBtn = $("#shuffle"),
+          gifTitle = $("#gifTitle"),
+          siteTitle = window.title;
 
       shuffleBtn.on("click", function (e) {
         e.preventDefault();
         $.ajax({
-          url: '/random',
+          url: '/api/random',
           type: 'get',
-          success: function () {
-            img.attr('src', this.url);
+          success: function (res) {
+            img.attr('src', res.url);
+            gifTitle.text(res.title);
           }
         });
       });
