@@ -16,9 +16,9 @@ var
   path           = require('path'),
   fs             = require('fs'),
   rmExt          = require('remove-ext'),
-  config         = require("./config.js"),
-  wrapper        = require("./lib/wrapper.js");
-
+  config         = require('./config.js'),
+  wrapper        = require('./lib/wrapper.js'),
+  gifs           = require('./lib/gifs.js');
 
 var app = express();
 
@@ -52,7 +52,7 @@ app.use(function( req, res, next ) {
  * Root
  */
 app.get('/', function (req, res) {
-  fs.readdir(path.join(__dirname, 'gifs'), function methodName(err, files) {
+  fs.readdir(gifs.dir, function methodName(err, files) {
     if (err) {
       res.status(500).send('There was an error on the server');
       return;
@@ -93,6 +93,27 @@ app.get('/api', function (req, res) {
 });
 
 /**
+ * API Random
+ */
+
+app.get('/api/random', function (req, res) {
+  gifs.random(function (err, gif) {
+    if (err) {
+      if (err == 'no files') {
+        res.status(200).json({ error: 'There are no gifs, you crip.' });
+      } else {
+        res.status(500).json({ error: err });
+      }
+    } else {
+      res.send({
+        url:   config.url + gifs.dirname + '/' + gif,
+        title: gifs.getTitle(gif)
+      });
+    }
+  });
+});
+
+/**
  * List all Gifs
  */
 app.get('/list', function (req, res) {
@@ -118,29 +139,26 @@ app.get('/list', function (req, res) {
  * Redirect to random gif
  */
 app.get('/random', function (req, res) {
-  var dir = path.join(__dirname, 'gifs');
-  fs.readdir(dir, function (err, files) {
+  gifs.random(function (err, gif) {
     if (err) {
-      res.status(500).send('There was an error on the server');
-      return;
-    }
-
-    if (files.length) {
-      var gif = files[Math.floor(Math.random() * files.length)];
-      fs.readFile(dir + '/' + gif, function (err, data) {
+      if (err == 'no files') {
+        res.status(200).json({ error: 'There are no gifs, you crip.' });
+      } else {
+        res.status(500).json({ error: err });
+      }
+    } else {
+      fs.readFile(gifs.dir + '/' + gif, function (err, data) {
         if (err) {
           res.status(500).send('There was an error on the server');
         } else {
           res.writeHead(200, {
             'Content-Type': 'image/gif',
             'Access-Control-Allow-Origin':'*',
-            'X-Gif-Link': config.url + gif
+            'X-Gif-Link': config.url + gifs.dirname + '/' + gif
           });
           res.end(data, 'binary');
         }
       })
-    } else {
-      res.status(404).send('There are no gifs, you crip.');
     }
   });
 });
