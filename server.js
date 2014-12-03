@@ -122,7 +122,7 @@ app.get('/api/random', function (req, res) {
  * List all Gifs
  */
 app.get('/list', function (req, res) {
-  gifs.list(function (err, gif) {
+  gifs.list(function (err, gif, i) {
     if (err) {
       if (err == 'no files') {
         res.status(200).json({ error: 'There are no gifs, you crip.' });

@@ -145,3 +145,48 @@ body
   margin 0
   font-weight 500
   font-size 14px
+
+
+
+
+/**
+ * List gifs
+ */
+ 
+.list-gifs
+  display -webkit-flex
+  display -moz-flex
+  display -ms-flex
+  display -o-flex
+  display flex
+  margin 0
+  padding 0
+  list-style none
+  justify-content center
+  flex-direction row
+  flex-wrap wrap
+  align-items center
+  align-content center
+  position absolute
+  top 80px
+  left 0
+  right 0
+  bottom 0
+  
+  li
+    text-align center
+    
+    a
+      text-decoration none
+      background-color $base-ui-color
+      color $brand-color
+      display block
+      line-height 2.2
+      padding 0em 1.5em
+      margin .5em
+      border-radius 10em
+      transition background-color .2s ease
+  
+      &:hover
+        background-color $link-color
+        color $base-ui-color

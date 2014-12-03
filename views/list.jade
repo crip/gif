@@ -1,6 +1,6 @@
 extends ./layout.jade
 
 block content
-  ul
+  ul.list-gifs
     each gif in gifs
       li: a(href="/#{gif}")= gif
