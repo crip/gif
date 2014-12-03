@@ -106,7 +106,7 @@ app.get('/api/random', function (req, res) {
       }
     } else {
       res.send({
-        url:   config.url + gifs.dirname + '/' + gif,
+        url:   config.url + rmExt(gif, 'gif') + '/full',
         title: gifs.getTitle(gif)
       });
     }
