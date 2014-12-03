@@ -9,8 +9,7 @@
     starter: function() {
       var img = $("#main img"),
           shuffleBtn = $("#shuffle"),
-          gifTitle = $("#gifTitle"),
-          siteTitle = window.title;
+          gifTitle = $("#gifTitle");
 
       shuffleBtn.on("click", function (e) {
         e.preventDefault();
@@ -19,7 +18,8 @@
           type: 'get',
           success: function (res) {
             img.attr('src', res.url);
-            gifTitle.text(res.title);
+            gifTitle.text(res.title.charAt(0).toUpperCase() + res.title.slice(1));
+            document.title = "Crip Gifs - " + res.title.charAt(0).toUpperCase() + res.title.slice(1);
           }
         });
       });

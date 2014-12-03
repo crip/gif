@@ -41,6 +41,11 @@ app.use(function( req, res, next ) {
   res.locals.wrap = wrapper.create({
     start: new Date()
   });
+  res.locals.title = function (title) {
+    var excludeGif = rmExt(title, 'gif').replace(/-/g, ' '),
+        title = excludeGif.charAt(0).toUpperCase() + excludeGif.slice(1);
+    return title;
+  };
   next();
 });
 
@@ -64,7 +69,7 @@ app.get('/', function (req, res) {
         gif: files[file],
         single: rmExt(files[file], 'gif'),
         full: rmExt(files[file], 'gif') + '/full',
-        title: rmExt(files[file], 'gif').replace(/-/g, ' ')
+        title: res.locals.title(files[file])
       });
     } else {
       res.status(404).send('There are no gifs, you crip.')
@@ -106,7 +111,7 @@ app.get('/api/random', function (req, res) {
       }
     } else {
       res.send({
-        url:   config.url + rmExt(gif, 'gif') + '/full',
+        url:   config.url + gif,
         title: gifs.getTitle(gif)
       });
     }
@@ -117,20 +122,18 @@ app.get('/api/random', function (req, res) {
  * List all Gifs
  */
 app.get('/list', function (req, res) {
-  fs.readdir(path.join(__dirname, 'gifs'), function (err, files) {
+  gifs.list(function (err, gif) {
     if (err) {
-      res.status(500).send('There was an error on the server');
-      return;
-    }
-
-    if (files.length) {
-      res.render('list', {
-        gifs: files.map(function (file) {
-          return rmExt(file, 'gif')
-        })
-      });
+      if (err == 'no files') {
+        res.status(200).json({ error: 'There are no gifs, you crip.' });
+      } else {
+        res.status(500).json({ error: err });
+      }
     } else {
-      res.status(404).send('There are no gifs, you crip.')
+      res.render('list', {
+        title: "All Gifs",
+        gifs: gif
+      });
     }
   });
 });
