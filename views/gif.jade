@@ -5,8 +5,8 @@ block content
   main(role="main" class="the-gif" id="main")
     img(src="#{gif}", alt="#{gif}")
     nav.gif-nav
-      a(href="#" class="nav-btn nav-btn--shuffle" id="shuffle") Shuffle gif
-      a(href="#{single}" class="nav-btn nav-btn--expand") Expand gif
-      a(href="#{full}" class="nav-btn nav-btn--full") Get gif link
+      a(href="#" class="nav-btn nav-btn--shuffle" id="shuffle" title="Shuffle gif") Shuffle gif
+      a(href="#{single}" class="nav-btn nav-btn--expand" title="Expand gif") Expand gif
+      a(href="#{full}" class="nav-btn nav-btn--full" title="Get gif link") Get gif link
 
-      h3.gif-title#gifTitle= title
+      h1.gif-title#gifTitle= title
