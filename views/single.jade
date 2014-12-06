@@ -1,6 +1,15 @@
 doctype html
 html
   head
+    script(type='text/javascript', src='http://www.google.com/jsapi')
+    script(type='text/javascript').
+      google.load("jquery", "1");
+    script(src='//use.typekit.net/oni3vzi.js')
+    script.
+      try{Typekit.load();}catch(e){}
+
+    link(rel="stylesheet", href="/public/dist/master.min.css")
+
     title Crip Gifs - #{gif}
     style.
       body {
@@ -10,8 +19,9 @@ html
         width: 100%;
         height: 100%;
         z-index: 0;
-        background: black no-repeat fixed center;
+        background: #1D2327 no-repeat fixed center;
         background-size: contain;
-        cursor: pointer;
         background-image: url('/#{gif}');
       }
+
+    meta(charset="UTF-8")
