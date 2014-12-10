@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use(methodOverride());
 
 // Define folder to contain gifs
-app.use('/', express.static(path.join(__dirname, 'gifs')));
+app.use('/', express.static(path.join(__dirname, config.gifDir)));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Catch-all route to set global values
