@@ -8,17 +8,18 @@
 /*-------------------------------------------------------------------
   Required modules.
 -------------------------------------------------------------------*/
-var
-  express        = require('express'),
-  bodyParser     = require('body-parser'),
-  methodOverride = require('method-override'),
-  request        = require('request'),
-  path           = require('path'),
-  fs             = require('fs'),
-  rmExt          = require('remove-ext'),
-  config         = require('./config.js'),
-  wrapper        = require('./lib/wrapper.js'),
-  gifs           = require('./lib/gifs.js');
+
+var express        = require('express');
+var bodyParser     = require('body-parser');
+var methodOverride = require('method-override');
+var request        = require('request');
+var path           = require('path');
+var fs             = require('fs');
+var rmExt          = require('remove-ext');
+var config         = require('./config.js');
+var wrapper        = require('./lib/wrapper.js');
+var gifs           = require('./lib/gifs.js');
+var uniqueRandom   = require('unique-random');
 
 var app = express();
 
@@ -64,9 +65,9 @@ app.get('/', function (req, res) {
     }
 
     if (files.length) {
-      var file = Math.floor(Math.random() * files.length);
+      var file = uniqueRandom(0, files.length);
       res.render('gif', {
-        gif: files[file],
+        gif: files[file()],
         single: rmExt(files[file], 'gif'),
         full: rmExt(files[file], 'gif') + '/full',
         title: res.locals.title(files[file])
