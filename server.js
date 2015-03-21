@@ -1,6 +1,6 @@
 /**
  * Crip Gifs
- * Copyright (c) 2014 Crip.io
+ * Copyright (c) 2015 Crip.io
  * Using Express, Jade, Request
  */
 
